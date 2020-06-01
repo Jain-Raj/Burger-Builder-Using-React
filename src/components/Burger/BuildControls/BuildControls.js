@@ -4,6 +4,7 @@ import BuildControl from './BuildControl/BuildControl'
 
 const buildControls = (props) => (
     <div className={classes.BuildControls}>
+        <p>Pricing: <strong>{'$ ' + props.priceofBurger}</strong></p>
         {Object.keys(props.ingredients).map(label => (
             <BuildControl
                 labelIngredient={label}
