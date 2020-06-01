@@ -14,12 +14,12 @@ class BurgerBuilder extends Component {
     }
 
     updateBurgerIngredients = (ingredientType, operationType) => {
-        const updatedIngredients = {...this.state.burgerIngredients}
-        if(operationType === "add")
+        const updatedIngredients = { ...this.state.burgerIngredients }
+        if (operationType === "add")
             updatedIngredients[ingredientType] += 1
         else
             updatedIngredients[ingredientType] -= 1
-        this.setState({burgerIngredients: updatedIngredients})
+        this.setState({ burgerIngredients: updatedIngredients })
     }
 
     render() {
@@ -27,7 +27,7 @@ class BurgerBuilder extends Component {
             <Auxiliary>
                 <Burger ingredients={this.state.burgerIngredients}></Burger>
                 <BuildControls
-                    ingredientLabels={Object.keys(this.state.burgerIngredients)}
+                    ingredients={this.state.burgerIngredients}
                     updateIngredients={this.updateBurgerIngredients}>
                 </BuildControls>
             </Auxiliary>

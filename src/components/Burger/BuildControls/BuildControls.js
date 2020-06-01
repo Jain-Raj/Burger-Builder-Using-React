@@ -4,11 +4,12 @@ import BuildControl from './BuildControl/BuildControl'
 
 const buildControls = (props) => (
     <div className={classes.BuildControls}>
-        {props.ingredientLabels.map(label => (
+        {Object.keys(props.ingredients).map(label => (
             <BuildControl
                 labelIngredient={label}
-                key={label} 
-                updateIngredient = {props.updateIngredients}>
+                key={label}
+                updateIngredient={props.updateIngredients}
+                disabledInfo={props.ingredients[label] <= 0}>
             </BuildControl>))}
     </div>
 )
