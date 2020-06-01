@@ -11,6 +11,10 @@ const burger = (props) => {
 
     let dynamicIngredients = keys.map((key, index) => {return <BurgerIngredients typeIngredient={key} key={key + index}></BurgerIngredients>})
 
+    if(Object.values(props.ingredients).reduce((a, b) => a + b, 0) === 0){
+        dynamicIngredients = <p>Please start Adding Ingredients</p>
+    }
+
     return (
         <div className={classes.Burger}>
             <BurgerIngredients typeIngredient='burger-top'></BurgerIngredients>
