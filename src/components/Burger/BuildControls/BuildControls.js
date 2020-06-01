@@ -8,7 +8,7 @@ const buildControls = (props) => (
             <BuildControl
                 labelIngredient={label}
                 key={label} 
-                added = {props.add}>
+                updateIngredient = {props.updateIngredients}>
             </BuildControl>))}
     </div>
 )
