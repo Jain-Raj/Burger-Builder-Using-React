@@ -2,15 +2,20 @@ import React from 'react'
 import BurgerIngredients from './BurgerIngredients/BurgerIngredients'
 import classes from './Burger.module.css'
 
-const burger = () => {
+const burger = (props) => {
+    let keys = []
+    Object.keys(props.ingredients).forEach(key => { 
+        for(let i = 0; i<props.ingredients[key]; i++)
+            keys.push(key) 
+    })
+
+    let dynamicIngredients = keys.map((key, index) => {return <BurgerIngredients typeIngredient={key} key={key + index}></BurgerIngredients>})
+
     return (
-        <div className={classes.Burger}> 
-            <BurgerIngredients typeIngredient ='burger-top'></BurgerIngredients>
-            <BurgerIngredients typeIngredient ='salad'></BurgerIngredients>
-            <BurgerIngredients typeIngredient ='bacon'></BurgerIngredients>
-            <BurgerIngredients typeIngredient ='cheese'></BurgerIngredients>
-            <BurgerIngredients typeIngredient ='meat'></BurgerIngredients>
-            <BurgerIngredients typeIngredient ='bread-bottom'></BurgerIngredients>
+        <div className={classes.Burger}>
+            <BurgerIngredients typeIngredient='burger-top'></BurgerIngredients>
+            {dynamicIngredients}
+            <BurgerIngredients typeIngredient='bread-bottom'></BurgerIngredients>
         </div>
     )
 }
