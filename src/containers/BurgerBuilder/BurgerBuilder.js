@@ -23,10 +23,17 @@ class BurgerBuilder extends Component {
 
     updateBurgerIngredients = (ingredientType, operationType) => {
         const updatedIngredients = { ...this.state.burgerIngredients }
-        if (operationType === "add")
+        let oldPrice = this.state.burgerPrice
+
+        if (operationType === "add") {
             updatedIngredients[ingredientType] += 1
-        else
+            this.setState({ burgerPrice: oldPrice + INGREDIENTS_PRICE[ingredientType] })
+        }
+        else {
             updatedIngredients[ingredientType] -= 1
+            this.setState({ burgerPrice: oldPrice - INGREDIENTS_PRICE[ingredientType] })
+        }
+
         this.setState({ burgerIngredients: updatedIngredients })
     }
 
