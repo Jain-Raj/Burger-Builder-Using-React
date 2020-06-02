@@ -12,6 +12,7 @@ const buildControls = (props) => (
                 updateIngredient={props.updateIngredients}
                 disabledInfo={props.ingredients[label] <= 0}>
             </BuildControl>))}
+        <button className={classes.OrderButton}>ORDER NOW</button>
     </div>
 )
 
