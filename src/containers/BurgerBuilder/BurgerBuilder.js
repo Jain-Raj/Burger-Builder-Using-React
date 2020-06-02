@@ -32,6 +32,10 @@ class BurgerBuilder extends Component {
         this.setState({ purchasing: true })
     }
 
+    purchaseContinueHandler = () => {
+        alert('You Continue')
+    }
+
     updateBurgerIngredients = (ingredientType, operationType) => {
         const updatedIngredients = { ...this.state.burgerIngredients }
         let oldPrice = this.state.burgerPrice
@@ -53,7 +57,10 @@ class BurgerBuilder extends Component {
             <Auxiliary>
                 {this.state.purchasing ?
                     <Modal modalClosed={this.closemodalHandler}>
-                        <OrderSummary ingredients={this.state.burgerIngredients} />
+                        <OrderSummary
+                            ingredients={this.state.burgerIngredients}
+                            purchaseCancel={this.closemodalHandler}
+                            purchaseContinue={this.purchaseContinueHandler} />
                     </Modal> : null
                 }
                 <Burger ingredients={this.state.burgerIngredients}></Burger>
