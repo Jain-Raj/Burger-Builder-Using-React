@@ -20,7 +20,12 @@ class BurgerBuilder extends Component {
             cheese: 0,
             meat: 0
         },
-        burgerPrice: 4
+        burgerPrice: 4,
+        purchasing: false
+    }
+
+    purchaseHandler = () => {
+        this.setState({ purchasing: !this.state.purchasing ? true: this.state.purchasing})
     }
 
     updateBurgerIngredients = (ingredientType, operationType) => {
@@ -42,14 +47,17 @@ class BurgerBuilder extends Component {
     render() {
         return (
             <Auxiliary>
-                <Modal>
-                    <OrderSummary ingredients={this.state.burgerIngredients}/>
-                </Modal>
+                { this.state.purchasing ?
+                    <Modal>
+                        <OrderSummary ingredients={this.state.burgerIngredients} />
+                    </Modal>: null
+                }
                 <Burger ingredients={this.state.burgerIngredients}></Burger>
                 <BuildControls
                     ingredients={this.state.burgerIngredients}
                     updateIngredients={this.updateBurgerIngredients}
-                    priceofBurger={this.state.burgerPrice}>
+                    priceofBurger={this.state.burgerPrice}
+                    click={this.purchaseHandler}>
                 </BuildControls>
             </Auxiliary>
         )
