@@ -6,7 +6,7 @@
     width: 100%;
     top: 0;
     left: 0;
-    display:flex;
+    display: flex;
     justify-content: space-between;
     box-sizing: border-box;
     align-items: center;
@@ -16,4 +16,10 @@
 
 .Toolbar nav {
     height: 100%;
+}
+
+@media (max-width:499px) {
+    .DesktopOnly {
+        display: none;
+    }
 }
