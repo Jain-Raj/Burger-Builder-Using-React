@@ -15,6 +15,10 @@
     .SideDrawer {
         display: none;
     }
+
+    .BackDrop {
+        display: none;
+    }
 }
 
 .Open {
