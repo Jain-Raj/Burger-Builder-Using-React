@@ -17,15 +17,21 @@ const INGREDIENTS_PRICE = {
 
 class BurgerBuilder extends Component {
     state = {
-        burgerIngredients: {
-            salad: 0,
-            bacon: 0,
-            cheese: 0,
-            meat: 0
-        },
+        burgerIngredients: null,
         burgerPrice: 4,
         purchasing: false,
-        loading: false
+        loading: false,
+        error: null
+    }
+
+    componentDidMount() {
+        axios.get('https://burger-builder-37337.firebaseio.com/burgerIngredients.json')
+            .then(response => {
+                this.setState({ burgerIngredients: response.data })
+            })
+            .catch(error => {
+                this.setState({error: error.message})
+            })
     }
 
     closemodalHandler = () => {
@@ -89,6 +95,21 @@ class BurgerBuilder extends Component {
         if (this.state.loading)
             orderSummary = <Spinner />
 
+        let burger = this.state.error ? <p>Cannot load Burger</p>: <Spinner />
+        if (this.state.burgerIngredients) {
+            burger = (
+                <Auxiliary>
+                    <Burger ingredients={this.state.burgerIngredients}></Burger>
+                    <BuildControls
+                        ingredients={this.state.burgerIngredients}
+                        updateIngredients={this.updateBurgerIngredients}
+                        priceofBurger={this.state.burgerPrice}
+                        click={this.purchaseHandler}>
+                    </BuildControls>
+                </Auxiliary>
+            )
+        }
+
         return (
             <Auxiliary>
                 {this.state.purchasing ?
@@ -96,13 +117,7 @@ class BurgerBuilder extends Component {
                         {orderSummary}
                     </Modal> : null
                 }
-                <Burger ingredients={this.state.burgerIngredients}></Burger>
-                <BuildControls
-                    ingredients={this.state.burgerIngredients}
-                    updateIngredients={this.updateBurgerIngredients}
-                    priceofBurger={this.state.burgerPrice}
-                    click={this.purchaseHandler}>
-                </BuildControls>
+                {burger}
             </Auxiliary>
         )
     }
