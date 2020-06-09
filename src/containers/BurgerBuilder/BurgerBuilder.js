@@ -30,7 +30,7 @@ class BurgerBuilder extends Component {
                 this.setState({ burgerIngredients: response.data })
             })
             .catch(error => {
-                this.setState({error: error.message})
+                this.setState({ error: error.message })
             })
     }
 
@@ -43,7 +43,16 @@ class BurgerBuilder extends Component {
     }
 
     purchaseContinueHandler = () => {
-        this.props.history.push('/checkout')
+        const params = []
+        for (let i in this.state.burgerIngredients)
+            params.push(encodeURIComponent(i) + '=' + encodeURIComponent(this.state.burgerIngredients[i]))
+
+        const queryString = params.join('&')
+
+        this.props.history.push({
+            pathname: '/checkout',
+            search: '?' + queryString
+        })
         // this.setState({ loading: true })
 
         // const orderInfo = {
@@ -96,7 +105,7 @@ class BurgerBuilder extends Component {
         if (this.state.loading)
             orderSummary = <Spinner />
 
-        let burger = this.state.error ? <p>Cannot load Burger</p>: <Spinner />
+        let burger = this.state.error ? <p>Cannot load Burger</p> : <Spinner />
         if (this.state.burgerIngredients) {
             burger = (
                 <Auxiliary>
