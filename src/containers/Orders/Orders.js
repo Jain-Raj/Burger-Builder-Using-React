@@ -1,4 +1,4 @@
-import React, { Componnet } from 'react'
+import React, { Component } from 'react'
 import Order from '../../components/UI/Order/Order'
 
 class Orders extends Component {
